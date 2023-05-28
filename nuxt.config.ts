@@ -2,14 +2,14 @@ export default defineNuxtConfig({
     modules: [
         '@invictus.codes/nuxt-vuetify',
         '@pinia/nuxt',
-        '@nuxtjs/supabaseClient',
+        '@nuxtjs/supabase',
         'nuxt-icon',
         '@nuxt/image',
         '@nuxt/image-edge',
         '@vee-validate/nuxt',
         'nuxt-font-loader'
     ],
-    // supabaseClient: {
+    // supabase: {
     //  todo doesnt work
     // },
     vuetify: {

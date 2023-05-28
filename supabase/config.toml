@@ -1,5 +1,5 @@
 # A string used to distinguish different Supabase projects on the same host. Defaults to the working
-# directory name when running `supabaseClient init`.
+# directory name when running `client init`.
 project_id = "fly-balloon-nuxt"
 
 [api]
@@ -79,4 +79,4 @@ vector_port = 54328
 # See: https://supabase.com/docs/guides/getting-started/local-development#enabling-local-logging
 gcp_project_id = ""
 gcp_project_number = ""
-gcp_jwt_path = "supabaseClient/gcloud.json"
+gcp_jwt_path = "client/gcloud.json"
