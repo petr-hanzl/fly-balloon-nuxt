@@ -3,15 +3,10 @@ export default defineNuxtConfig({
         '@invictus.codes/nuxt-vuetify',
         '@pinia/nuxt',
         '@nuxtjs/supabase',
-        'nuxt-icon',
-        '@nuxt/image',
-        '@nuxt/image-edge',
-        '@vee-validate/nuxt',
-        'nuxt-font-loader'
     ],
-    // supabase: {
-    //  todo doesnt work
-    // },
+    supabase: {
+
+    },
     vuetify: {
         /* vuetify options */
         vuetifyOptions: {
