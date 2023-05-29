@@ -37,24 +37,24 @@ export interface Database {
       actualities: {
         Row: {
           created_at: string | null
+          creator_id: string | null
           header: string | null
           id: number
           text: string | null
-          user_id: string | null
         }
         Insert: {
           created_at?: string | null
+          creator_id?: string | null
           header?: string | null
           id?: number
           text?: string | null
-          user_id?: string | null
         }
         Update: {
           created_at?: string | null
+          creator_id?: string | null
           header?: string | null
           id?: number
           text?: string | null
-          user_id?: string | null
         }
       }
       balloons: {
@@ -156,6 +156,7 @@ export interface Database {
       }
       flights: {
         Row: {
+          additional_information: string | null
           balloon_id: number | null
           created_at: string | null
           creator_id: string | null
@@ -166,6 +167,7 @@ export interface Database {
           pilot_id: string | null
         }
         Insert: {
+          additional_information?: string | null
           balloon_id?: number | null
           created_at?: string | null
           creator_id?: string | null
@@ -176,6 +178,7 @@ export interface Database {
           pilot_id?: string | null
         }
         Update: {
+          additional_information?: string | null
           balloon_id?: number | null
           created_at?: string | null
           creator_id?: string | null
