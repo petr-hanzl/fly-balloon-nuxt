@@ -16,3 +16,5 @@ export type MarketingExpense = Database["public"]["Tables"]["marketing_expenses"
 export type MarketingRevenue = Database["public"]["Tables"]["marketing_revenues"]["Row"]
 
 export type Order = Database["public"]["Tables"]["orders"]["Row"]
+
+
