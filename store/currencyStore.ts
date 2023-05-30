@@ -29,6 +29,17 @@ export const useCurrencyStore = defineStore("currencyStore", {
                 console.log(data)
                 this.currencies = data
             }
+        },
+        getCurrencyByID(currencyID: number): CurrencyType | null {
+            if (this.currencies && this.currencies.length > 0) {
+                this.currencies.forEach((currency) => {
+                    if (currency.id === currencyID) {
+                        return currency
+                    }
+                })
+            }
+
+            return null
         }
     },
     getters: {
