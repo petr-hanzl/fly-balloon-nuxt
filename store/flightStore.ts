@@ -1,12 +1,13 @@
 import {defineStore} from "pinia";
 import supabase from "~/supabase/client";
-import {Balloon, Flight, FlightType} from "~/types/collection";
+import {Balloon, Flight, FlightStatus, FlightType} from "~/types/collection";
 
 
 export const useFlightStore = defineStore("flightStore", {
     state: () => ({
         flights: [] as Flight[],
         flightTypes: [] as FlightType[],
+        flightStatus:[] as FlightStatus[]
 
     }),
     actions: {
@@ -31,6 +32,33 @@ export const useFlightStore = defineStore("flightStore", {
                 this.flightTypes = data
             }
         },
+        async fetchALlFlightStatus(force: boolean) {
+            // do we need to fetch?
+            if (!force && this.flightStatus) {
+                if (this.flightStatus.length > 0) {
+                    // todo WTF why cant i put this on same line????
+                    return
+                }
+            }
+
+            const { data, error } = await supabase
+                .from("flight_status")
+                .select()
+
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+
+            if (data) {
+                console.log("data")
+                console.log(data)
+
+                this.flightStatus = data
+            }
+        },
+
+
 
         async fetchAllFlights(force: boolean) {
             // do we need to fetch?
@@ -67,10 +95,20 @@ export const useFlightStore = defineStore("flightStore", {
             return null
         },
         getFlightTypeByID(flightTypeID: number) {
-            if (this.flightTypes && this.flights.length > 0) {
+            if (this.flightTypes && this.flightTypes.length > 0) {
                 this.flightTypes.forEach(flightType => {
                     if (flightType.id == flightTypeID) {
                         return flightType
+                    }
+                })
+            }
+            return null
+        },
+        getFlightStatusByID(flightStatusID: number) {
+            if (this.flightStatus && this.flightStatus.length > 0) {
+                this.flightStatus.forEach(flightStatus => {
+                    if (flightStatus.id == flightStatusID) {
+                        return flightStatus
                     }
                 })
             }
@@ -83,6 +121,9 @@ export const useFlightStore = defineStore("flightStore", {
         },
         getFlightTypes(): FlightType[] {
             return this.flightTypes
+        },
+        getFlightStatus(): FlightStatus[] {
+            return this.flightStatus
         }
 
 

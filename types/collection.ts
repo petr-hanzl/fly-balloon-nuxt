@@ -9,7 +9,7 @@ export type Car = Database["public"]["Tables"]["cars"]["Row"]
 
 export type CurrencyType = Database["public"]["Tables"]["currency_types"]["Row"]
 
-export type Customers = Database["public"]["Tables"]["customers"]["Row"]
+export type Customer = Database["public"]["Tables"]["customers"]["Row"]
 
 export type ExpenseType = Database["public"]["Tables"]["expense_types"]["Row"]
 export type Expense = Database["public"]["Tables"]["expenses"]["Row"]
