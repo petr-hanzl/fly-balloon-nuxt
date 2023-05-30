@@ -3,7 +3,7 @@ import supabase from "~/supabase/client";
 import {Actuality, ActualityType} from "~/types/collection";
 
 
-export const useAuthStore = defineStore("actualityStore", {
+export const useActualityStore = defineStore("actualityStore", {
     state: () => ({
         actualities: [] as Actuality[],
         actualityTypes: [] as ActualityType[]
