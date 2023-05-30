@@ -27,6 +27,7 @@ export const useBalloonStore = defineStore("balloonStore", {
             if (data) {
                 console.log("data")
                 console.log(data)
+                this.balloons = data
             }
         },
         getBalloonByID(balloonID: number): Balloon | null {

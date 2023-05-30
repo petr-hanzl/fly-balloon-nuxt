@@ -4,12 +4,12 @@
   </div>
 </template>
 <script setup lang="ts">
-  import supabase from "~/supabase/client";
+  import {useBalloonStore} from "~/store/balloonStore";
 
-  const { data, error } = await supabase
-    .from("balloons")
-    .select()
-  console.log(data)
-  console.log(error)
+  const balloonStore = useBalloonStore()
+
+  await balloonStore.fetchAllBalloons(false)
+
+  console.log(balloonStore.getBalloons)
 </script>
 

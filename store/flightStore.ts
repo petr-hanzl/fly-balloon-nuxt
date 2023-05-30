@@ -11,12 +11,10 @@ export const useFlightStore = defineStore("flightStore", {
     }),
     actions: {
         async fetchAllFlightTypes(force: boolean) {
-
             // do we need to fetch?
             if (!force && this.flightTypes && this.flightTypes.length > 0) {
                 return
             }
-
 
             const { data, error } = await supabase
                 .from("flight_types")
@@ -35,10 +33,6 @@ export const useFlightStore = defineStore("flightStore", {
         },
 
         async fetchAllFlights(force: boolean) {
-
-            // prefetch expense types
-            await this.fetchAllFlightTypes(force)
-
             // do we need to fetch?
             if (!force && this.flights) {
                 if (this.flights.length > 0) {
@@ -46,7 +40,6 @@ export const useFlightStore = defineStore("flightStore", {
                     return
                 }
             }
-
 
             const { data, error } = await supabase
                 .from("flights")

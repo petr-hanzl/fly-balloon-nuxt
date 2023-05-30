@@ -11,7 +11,6 @@ export const useActualityStore = defineStore("actualityStore", {
     }),
     actions: {
         async fetchAllActualityTypes(force: boolean) {
-
             // do we need to fetch?
             if (!force && this.actualityTypes && this.actualityTypes.length > 0) {
                 return
@@ -36,10 +35,6 @@ export const useActualityStore = defineStore("actualityStore", {
         },
 
         async fetchAllActualities(force: boolean) {
-
-            // prefetch types
-            await this.fetchAllActualityTypes(force)
-
             // do we need to fetch?
             if (!force && this.actualities && this.actualities.length > 0) {
                 return
