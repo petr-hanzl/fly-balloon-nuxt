@@ -11,7 +11,6 @@ export const useExpenseStore = defineStore("expenseStore", {
     }),
     actions: {
         async fetchAllExpenseTypes(force: boolean) {
-
             // do we need to fetch?
             if (!force && this.expenseTypes && this.expenseTypes.length > 0) {
                 return
@@ -35,10 +34,6 @@ export const useExpenseStore = defineStore("expenseStore", {
         },
 
         async fetchAllExpenses(force: boolean) {
-
-            // prefetch expense types
-            await this.fetchAllExpenseTypes(force)
-
             // do we need to fetch?
             if (!force && this.expenses) {
                 if (this.expenses.length > 0) {
