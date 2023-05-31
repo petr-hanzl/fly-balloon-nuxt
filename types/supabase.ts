@@ -218,27 +218,56 @@ export interface Database {
           price?: string | null
         }
       }
+      extended_user_roles: {
+        Row: {
+          id: number
+          role: string | null
+        }
+        Insert: {
+          id?: number
+          role?: string | null
+        }
+        Update: {
+          id?: number
+          role?: string | null
+        }
+      }
       extended_users: {
         Row: {
           created_at: string | null
+          first_name: string | null
           id: number
           is_active: boolean | null
-          is_driver: boolean | null
+          last_name: string | null
           phone_number: string | null
+          pilots_class: string | null
+          pilots_licence_number: string | null
+          role_id: number | null
+          user_id: string | null
         }
         Insert: {
           created_at?: string | null
+          first_name?: string | null
           id?: number
           is_active?: boolean | null
-          is_driver?: boolean | null
+          last_name?: string | null
           phone_number?: string | null
+          pilots_class?: string | null
+          pilots_licence_number?: string | null
+          role_id?: number | null
+          user_id?: string | null
         }
         Update: {
           created_at?: string | null
+          first_name?: string | null
           id?: number
           is_active?: boolean | null
-          is_driver?: boolean | null
+          last_name?: string | null
           phone_number?: string | null
+          pilots_class?: string | null
+          pilots_licence_number?: string | null
+          role_id?: number | null
+          user_id?: string | null
         }
       }
       flight_status: {

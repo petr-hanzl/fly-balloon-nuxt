@@ -4,12 +4,13 @@
   </div>
 </template>
 <script setup lang="ts">
-  import {useBalloonStore} from "~/store/balloonStore";
+  import {useExtendedUserStore} from "~/store/extendedeUserStore";
 
-  const balloonStore = useBalloonStore()
+  const extendedUserStore = useExtendedUserStore()
 
-  await balloonStore.fetchAllBalloons(false)
+  await extendedUserStore.fetchAllExtendedUsers(true)
 
-  console.log(balloonStore.getBalloons)
+  console.log(extendedUserStore.extendedUsers)
+  console.log(extendedUserStore.extendedUserRoles)
 </script>
 
