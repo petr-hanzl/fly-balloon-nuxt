@@ -53,6 +53,27 @@ export const useExtendedUserStore = defineStore("extendedUserStore", {
                 this.extendedUsers = data
             }
         },
+
+        async createExtendedUser(extendedUser: ExtendedUser) {
+            const { error } = await supabase
+                .from("extended_users")
+                .insert(extendedUser)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async createExtendedUserRole(extendedUserRole: ExtendedUserRole) {
+            const { error } = await supabase
+                .from("extended_users")
+                .insert(extendedUserRole)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
         getExtendedUserByID(extendedUserID: number): ExtendedUser | null {
             if (this.extendedUsers && this.extendedUsers.length > 0) {
                 this.extendedUsers.forEach((extendedUser) => {
@@ -78,6 +99,9 @@ export const useExtendedUserStore = defineStore("extendedUserStore", {
         getExtendedUsers(): ExtendedUser[]{
             return this.extendedUsers;
         },
+        getExtendedUserRoles(): ExtendedUserRole[]{
+            return this.extendedUserRoles;
+        }
 
 
     }
