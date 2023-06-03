@@ -30,6 +30,31 @@ export const useReservationStore = defineStore("ReservationStore", {
                 this.reservations = data
             }
         },
+
+        async createReservation(reservation: Reservation) {
+            const { error } = await supabase
+                .from("reservations")
+                .insert(reservation)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateReservation(reservation: Reservation) {
+            const { error } = await supabase
+                .from("reservations")
+                .update(reservation)
+                .eq("id", reservation.id)
+        },
+
+        async deleteReservation(reservationID: number) {
+            const { error } = await supabase
+                .from("reservations")
+                .delete()
+                .eq("id", reservationID)
+        },
+
         getReservationByID(reservationID: number): Reservation | null {
             if (this.reservations && this.reservations.length > 0) {
                 this.reservations.forEach((reservation) => {

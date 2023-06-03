@@ -29,6 +29,32 @@ export const useLocationTypeStore = defineStore("locationTypeStore", {
                 this.locationTypes = data
             }
         },
+
+        async createLocationType(locationType: LocationType) {
+            const { error } = await supabase
+                .from("location_types")
+                .insert(locationType)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateLocationType(locationType: LocationType) {
+            const { error } = await supabase
+                .from("location_types")
+                .update(locationType)
+                .eq("id", locationType.id)
+        },
+
+        async deleteLocationType(locationTypeID: number) {
+            const { error } = await supabase
+                .from("location_types")
+                .delete()
+                .eq("id", locationTypeID)
+        },
+
+
         getLocationTypeByID(locationTypeID: number): LocationType | null {
             if (this.locationTypes && this.locationTypes.length > 0) {
                 this.locationTypes.forEach((locationType) => {

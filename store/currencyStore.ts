@@ -30,6 +30,31 @@ export const useCurrencyStore = defineStore("currencyStore", {
                 this.currencies = data
             }
         },
+
+        async createCurrency(currency: CurrencyType) {
+            const { error } = await supabase
+                .from("extended_users")
+                .insert(currency)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateCurrency(currency: CurrencyType) {
+            const { error } = await supabase
+                .from("currency_types")
+                .update(currency)
+                .eq("id", currency.id)
+        },
+
+        async deleteCurrency(currencyID: number) {
+            const { error } = await supabase
+                .from("currency_types")
+                .delete()
+                .eq("id", currencyID)
+        },
+
         getCurrencyByID(currencyID: number): CurrencyType | null {
             if (this.currencies && this.currencies.length > 0) {
                 this.currencies.forEach((currency) => {

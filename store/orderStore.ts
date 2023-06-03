@@ -29,6 +29,31 @@ export const useOrderStore = defineStore("orderStore", {
                 this.orders = data
             }
         },
+
+        async createOrder(order: Order) {
+            const { error } = await supabase
+                .from("orders")
+                .insert(order)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateOrder(order: Order) {
+            const { error } = await supabase
+                .from("orders")
+                .update(order)
+                .eq("id", order.id)
+        },
+
+        async deleteOrder(orderID: number) {
+            const { error } = await supabase
+                .from("orders")
+                .delete()
+                .eq("id", orderID)
+        },
+
         getOrderByID(orderID: number): Order | null {
             if (this.orders && this.orders.length > 0) {
                 this.orders.forEach((order) => {

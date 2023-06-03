@@ -10,7 +10,6 @@ export const useBalloonStore = defineStore("balloonStore", {
     }),
     actions: {
         async fetchAllBalloons(force: boolean) {
-
             // do we need to fetch?
             if (!force && this.balloons && this.balloons.length > 0) {
                 return
@@ -30,6 +29,31 @@ export const useBalloonStore = defineStore("balloonStore", {
                 this.balloons = data
             }
         },
+
+        async createBalloon(balloon: Balloon) {
+            const { error } = await supabase
+                .from("extended_users")
+                .insert(balloon)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateBalloon(balloon: Balloon) {
+            const { error } = await supabase
+                .from("balloons")
+                .update(balloon)
+                .eq("id", balloon.id)
+        },
+
+        async deleteBalloon(balloonID: number) {
+            const { error } = await supabase
+                .from("balloons")
+                .delete()
+                .eq("id", balloonID)
+        },
+
         getBalloonByID(balloonID: number): Balloon | null {
             if (this.balloons && this.balloons.length > 0) {
                 this.balloons.forEach((balloon) => {

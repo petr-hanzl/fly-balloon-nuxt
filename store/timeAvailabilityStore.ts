@@ -30,6 +30,31 @@ export const useTimeAvailabilityStore = defineStore("timeAvailabilityStore", {
                 this.timeAvailabilities = data
             }
         },
+
+        async createTimeAvailability(timeAvailability: TimeAvailability) {
+            const { error } = await supabase
+                .from("time_availability")
+                .insert(timeAvailability)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateTimeAvailability(timeAvailability: TimeAvailability) {
+            const { error } = await supabase
+                .from("time_availability")
+                .update(timeAvailability)
+                .eq("id", timeAvailability.id)
+        },
+
+        async deleteTimeAvailability(timeAvailabilityID: number) {
+            const { error } = await supabase
+                .from("time_availability")
+                .delete()
+                .eq("id", timeAvailabilityID)
+        },
+
         getTimeAvailabilityByID(TimeAvailabilityID: number): TimeAvailability | null {
             if (this.timeAvailabilities && this.timeAvailabilities.length > 0) {
                 this.timeAvailabilities.forEach((TimeAvailability) => {

@@ -10,28 +10,7 @@ export const useExtendedUserStore = defineStore("extendedUserStore", {
 
     }),
     actions: {
-        async fetchAllExtendedUserRoles(force: boolean) {
-
-            // do we need to fetch?
-            if (!force && this.extendedUserRoles && this.extendedUserRoles.length > 0) {
-                return
-            }
-
-            const { data, error } = await supabase
-                .from("extended_user_roles")
-                .select()
-            if (error) {
-                console.log("error")
-                console.log(error)
-            }
-
-            if (data) {
-                console.log("data")
-                console.log(data)
-                this.extendedUserRoles = data
-            }
-
-        },
+        // extended users
         async fetchAllExtendedUsers(force: boolean) {
 
             // do we need to fetch?
@@ -64,14 +43,18 @@ export const useExtendedUserStore = defineStore("extendedUserStore", {
             }
         },
 
-        async createExtendedUserRole(extendedUserRole: ExtendedUserRole) {
+        async updateExtendedUser(extendedUser: ExtendedUser) {
             const { error } = await supabase
                 .from("extended_users")
-                .insert(extendedUserRole)
-            if (error) {
-                console.log("error")
-                console.log(error)
-            }
+                .update(extendedUser)
+                .eq("id", extendedUser.id)
+        },
+
+        async deleteExtendedUser(extendedUserID: number) {
+            const { error } = await supabase
+                .from("extended_users")
+                .delete()
+                .eq("id", extendedUserID)
         },
 
         getExtendedUserByID(extendedUserID: number): ExtendedUser | null {
@@ -84,6 +67,54 @@ export const useExtendedUserStore = defineStore("extendedUserStore", {
             }
             return null
         },
+
+        // extended user roles
+        async fetchAllExtendedUserRoles(force: boolean) {
+            // do we need to fetch?
+            if (!force && this.extendedUserRoles && this.extendedUserRoles.length > 0) {
+                return
+            }
+
+            const { data, error } = await supabase
+                .from("extended_user_roles")
+                .select()
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+
+            if (data) {
+                console.log("data")
+                console.log(data)
+                this.extendedUserRoles = data
+            }
+
+        },
+
+        async createExtendedUserRole(extendedUserRole: ExtendedUserRole) {
+            const { error } = await supabase
+                .from("extended_user_roles")
+                .insert(extendedUserRole)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateExtendedUserRole(extendedUserRole: ExtendedUserRole) {
+            const { error } = await supabase
+                .from("extended_user_roles")
+                .update(extendedUserRole)
+                .eq("id", extendedUserRole.id)
+        },
+
+        async deleteExtendedUserRole(extendedUserRoleID: number) {
+            const { error } = await supabase
+                .from("extended_user_roles")
+                .delete()
+                .eq("id", extendedUserRoleID)
+        },
+
         getExtendedUserRoleByID(extendedUserRoleID: number): ExtendedUserRole | null {
             if (this.extendedUserRoles && this.extendedUserRoles.length > 0) {
                 this.extendedUserRoles.forEach((extendedUserRole) => {

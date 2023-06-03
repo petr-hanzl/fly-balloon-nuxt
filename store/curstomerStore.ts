@@ -30,6 +30,31 @@ export const useCustomerStore = defineStore("ustomerStore", {
                 this.customers = data
             }
         },
+
+        async createCustomer(customer: Customer) {
+            const { error } = await supabase
+                .from("extended_users")
+                .insert(customer)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateCustomer(customer: Customer) {
+            const { error } = await supabase
+                .from("customers")
+                .update(customer)
+                .eq("id", customer.id)
+        },
+
+        async deleteCustomer(customerID: number) {
+            const { error } = await supabase
+                .from("customers")
+                .delete()
+                .eq("id", customerID)
+        },
+
         getCustomerByID(customerID: number): Customer | null {
             if (this.customers && this.customers.length > 0) {
                 this.customers.forEach((customer) => {

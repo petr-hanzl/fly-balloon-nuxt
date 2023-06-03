@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import supabase from "~/supabase/client";
-import {Voucher, VoucherStatus} from "~/types/collection";
+import {VoucherStatus, Voucher} from "~/types/collection";
 
 
 export const useVoucherStore = defineStore("voucherStore", {
@@ -30,6 +30,43 @@ export const useVoucherStore = defineStore("voucherStore", {
                 this.vouchers = data
             }
         },
+
+        async createVoucher(voucher: Voucher) {
+            const { error } = await supabase
+                .from("voucher")
+                .insert(voucher)
+            if (error) {
+                console.log("error")
+                console.log(error)
+            }
+        },
+
+        async updateVoucher(voucher: Voucher) {
+            const { error } = await supabase
+                .from("vouchers")
+                .update(voucher)
+                .eq("id", voucher.id)
+        },
+
+        async deleteVoucher(voucherID: number) {
+            const { error } = await supabase
+                .from("vouchers")
+                .delete()
+                .eq("id", voucherID)
+        },
+
+        getVoucherByID(voucherID: number): Voucher | null {
+            if (this.vouchers && this.vouchers.length > 0) {
+                this.vouchers.forEach((voucher) => {
+                    if (voucher.id == voucherID) {
+                        return voucher
+                    }
+                })
+            }
+            return null
+        },
+
+
         async fetchAllVoucherStatus(force: boolean) {
             // do we need to fetch?
             if (!force && this.voucherStatus && this.voucherStatus.length > 0) {
@@ -50,16 +87,31 @@ export const useVoucherStore = defineStore("voucherStore", {
                 this.voucherStatus = data
             }
         },
-        getVoucherByID(voucherID: number): Voucher | null {
-            if (this.vouchers && this.vouchers.length > 0) {
-                this.vouchers.forEach((voucher) => {
-                    if (voucher.id == voucherID) {
-                        return voucher
-                    }
-                })
+
+        async createVoucherStatus(voucherStatus: VoucherStatus) {
+            const { error } = await supabase
+                .from("voucher_status")
+                .insert(voucherStatus)
+            if (error) {
+                console.log("error")
+                console.log(error)
             }
-            return null
         },
+
+        async updateVoucherStatus(voucherStatus: VoucherStatus) {
+            const { error } = await supabase
+                .from("voucher_status")
+                .update(voucherStatus)
+                .eq("id", voucherStatus.id)
+        },
+
+        async deleteVoucherStatus(voucherStatusID: number) {
+            const { error } = await supabase
+                .from("voucher_status")
+                .delete()
+                .eq("id", voucherStatusID)
+        },
+
         getVoucherStatusByID(voucherStatusID: number): Voucher | null {
             if (this.voucherStatus && this.voucherStatus.length > 0) {
                 this.voucherStatus.forEach((voucherStatus) => {
@@ -74,6 +126,9 @@ export const useVoucherStore = defineStore("voucherStore", {
     getters: {
         getVouchers(): Voucher[]{
             return this.vouchers;
+        },
+        getVoucherStatus(): VoucherStatus[]{
+            return this.voucherStatus;
         },
 
 
