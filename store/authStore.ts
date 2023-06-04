@@ -26,6 +26,9 @@ export const useAuthStore = defineStore("authStore", {
         }
     },
     getters: {
+        getCurrentLoggedUser(): {} {
+            return this.currentUser
+        }
 
     }
 })

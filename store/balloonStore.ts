@@ -19,13 +19,12 @@ export const useBalloonStore = defineStore("balloonStore", {
                 .from("balloons")
                 .select()
             if (error) {
-                console.log("error")
-                console.log(error)
+                console.log("error balloons")
+                console.log(JSON.stringify(error, null, 2))
             }
 
             if (data) {
-                console.log("data")
-                console.log(data)
+
                 this.balloons = data
             }
         },

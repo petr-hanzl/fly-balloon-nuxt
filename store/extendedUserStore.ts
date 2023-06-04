@@ -22,13 +22,11 @@ export const useExtendedUserStore = defineStore("extendedUserStore", {
                 .from("extended_users")
                 .select()
             if (error) {
-                console.log("error")
+                console.log("user store error")
                 console.log(error)
             }
 
             if (data) {
-                console.log("data")
-                console.log(data)
                 this.extendedUsers = data
             }
         },

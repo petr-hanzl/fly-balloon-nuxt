@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <NuxtWelcome />
-  </div>
+    <div>
+        <NuxtLayout>
+            <NuxtPage/>
+        </NuxtLayout>
+    </div>
 </template>
 <script setup lang="ts">
-  import {useExtendedUserStore} from "~/store/extendedeUserStore";
+  import {useExtendedUserStore} from "~/store/extendedUserStore";
 
   const extendedUserStore = useExtendedUserStore()
 
@@ -14,3 +16,6 @@
   console.log(extendedUserStore.extendedUserRoles)
 </script>
 
+<style scoped>
+
+</style>
