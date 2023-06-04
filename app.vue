@@ -1,9 +1,11 @@
 <template>
-    <div>
-        <NuxtLayout>
-            <NuxtPage/>
-        </NuxtLayout>
-    </div>
+    <v-app>
+        <div>
+            <NuxtLayout>
+                <NuxtPage/>
+            </NuxtLayout>
+        </div>
+    </v-app>
 </template>
 <script setup lang="ts">
   import {useExtendedUserStore} from "~/store/extendedUserStore";

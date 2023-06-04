@@ -1,14 +1,12 @@
 <template>
-  <v-app>
-      <LoginForm/>
-  </v-app>
-
+    <LoginForm/>
 </template>
 
 <script setup lang="ts">
 
     definePageMeta({
-        middleware: ["auth"]
+        middleware: ["auth"],
+        layout: 'auth'
     })
 
 </script>

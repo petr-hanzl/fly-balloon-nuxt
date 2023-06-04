@@ -1,9 +1,5 @@
 <template>
-    <v-app>
-
-        <BalloonList/>
-    </v-app>
-
+    <BalloonList/>
 </template>
 
 <script setup lang="ts">
