@@ -1,17 +1,16 @@
 <template>
-  <h1>
-      NEW BALLOON
-  </h1>
-
+  <v-app>
+      <NewBalloon/>
+  </v-app>
 </template>
 
 <script setup lang="ts">
 
-  definePageMeta({
-      middleware: ["auth"]
-  })
 
+
+  import NewBalloon from "~/components/NewBalloon.vue";
 </script>
+
 
 <style scoped>
 

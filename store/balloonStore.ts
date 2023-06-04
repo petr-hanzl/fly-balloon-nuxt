@@ -31,11 +31,11 @@ export const useBalloonStore = defineStore("balloonStore", {
 
         async createBalloon(balloon: Balloon) {
             const { error } = await supabase
-                .from("extended_users")
+                .from("balloons")
                 .insert(balloon)
             if (error) {
                 console.log("error")
-                console.log(error)
+                console.log(JSON.stringify(error, null, 2))
             }
         },
 
@@ -54,15 +54,25 @@ export const useBalloonStore = defineStore("balloonStore", {
         },
 
         getBalloonByID(balloonID: number): Balloon | null {
+            // if (this.balloons && this.balloons.length > 0) {
+            //     this.balloons.filter((balloon) => {
+            //
+            //         return balloon.id === balloonID
+            //     })
+            // }
+
+
             if (this.balloons && this.balloons.length > 0) {
                 this.balloons.forEach((balloon) => {
                     if (balloon.id == balloonID) {
+                        console.log(balloon)
                         return balloon
                     }
                 })
             }
             return null
-        }
+        },
+
     },
     getters: {
         getBalloons(): Balloon[]{
