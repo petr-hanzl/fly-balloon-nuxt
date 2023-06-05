@@ -1,14 +1,14 @@
 <template>
   {{balloon}}
-
 </template>
 
 <script setup lang="ts">
-  import {Balloon} from "~/types/collection";
+
   import {useBalloonStore} from "~/store/balloonStore";
 
   definePageMeta({
-      middleware: ["auth"]
+      middleware: ["auth"],
+      excludeFromMenu: true
   })
 
   const balloonStore = useBalloonStore()

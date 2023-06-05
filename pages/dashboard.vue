@@ -5,7 +5,8 @@
 <script setup lang="ts">
 
   definePageMeta({
-      middleware: ["auth"]
+      middleware: ["auth"],
+      icon: 'mdi-view-dashboard'
   })
 
 </script>

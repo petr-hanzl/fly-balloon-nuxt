@@ -1,14 +1,14 @@
 <template>
     <v-app>
-        <div>
-            <NuxtLayout>
+        <NuxtLayout>
+            <v-main>
                 <NuxtPage/>
-            </NuxtLayout>
-        </div>
+            </v-main>
+        </NuxtLayout>
     </v-app>
 </template>
-<script setup lang="ts">
 
+<script setup lang="ts">
 
 </script>
 

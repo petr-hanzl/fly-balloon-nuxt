@@ -3,9 +3,12 @@
 </template>
 
 <script setup lang="ts">
+
     import BalloonList from "~/components/BalloonList.vue";
+
     definePageMeta({
-        middleware: ["auth"]
+        middleware: ["auth"],
+        icon: 'mdi-view-dashboard'
     })
 
 </script>

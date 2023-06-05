@@ -5,10 +5,12 @@
 </template>
 
 <script setup lang="ts">
+import NewBalloon from "~/components/NewBalloon.vue";
 
+  definePageMeta({
+    icon: 'mdi-view-dashboard'
+  })
 
-
-  import NewBalloon from "~/components/NewBalloon.vue";
 </script>
 
 

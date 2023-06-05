@@ -6,6 +6,7 @@
 
     definePageMeta({
         middleware: ["auth"],
+        excludeFromMenu: true,
         layout: 'auth'
     })
 
