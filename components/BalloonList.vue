@@ -34,17 +34,22 @@
 
 
                   <td>
-                      <nuxt-link style="text-decoration: none; color: inherit;" :to="{path:`balloons/${balloon.id}`, params:{balloon: balloon}}">
-                        <Icon name="ic:baseline-edit" class="icon"/>
+                      <nuxt-link style="text-decoration: none; color: inherit;" :to="{path:`balloons/${balloon.id}`}">
+                          <v-btn size="x-small">
+                              <Icon name="ic:baseline-edit" class="icon"/>
+                          </v-btn>
                       </nuxt-link>
-                      <Icon name="ic:baseline-delete" />
+                      <v-btn size="x-small" @click="balloonStore.deleteBalloon(balloon.id)">
+
+                          <Icon name="ic:baseline-delete"/>
+                      </v-btn>
 
                   </td>
             </tr>
             </tbody>
 
       </v-table>
-        <v-btn size ="large" style="position: relative" @click.prevent="create">New</v-btn>
+        <v-btn size ="large" style="position: relative" @click.prevent="navigateTo({path: `/balloons/new`})">New</v-btn>
     </v-card>
 </template>
 
@@ -67,17 +72,6 @@
       }
 
       return "Not Active"
-  }
-
-
-  const showBalloonInfo = (balloonID: number) => {
-      console.log("asd")
-      navigateTo(`balloons/${balloonID}`)
-  }
-
-  const create = () => {
-
-      navigateTo({ path: "/balloons/new" })
   }
 
 
