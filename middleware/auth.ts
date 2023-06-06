@@ -1,10 +1,9 @@
+import {useAuthStore} from "~/store/authStore";
+
 export default defineNuxtRouteMiddleware((to) => {
-    // const user = useSupabaseUser()
+    // const userStore = useAuthStore() todo uncomment
     //
-    // if (!user.value.) {
-    //
-    //     navigateTo("/")
-    // } else if(to.path==="/"){
-    //     navigateTo("/dashboard")
+    // if (!userStore.isLoggedIn && to.path != "/") {
+    //     return navigateTo({path: "/"})
     // }
 })

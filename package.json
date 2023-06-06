@@ -11,6 +11,7 @@
     "dbreset": "supabase db reset"
   },
   "devDependencies": {
+    "@mdi/font": "^7.2.96",
     "@nuxtjs/supabase": "^0.3.5",
     "@pinia/nuxt": "^0.4.11",
     "@types/node": "^18",

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@nuxtjs/supabase',
         // '@nuxt/image',
-        'nuxt-icon'
+        'nuxt-icon' // https://icones.js.org/
     ],
     devServerHandlers: [],
     supabase: {
@@ -14,14 +14,14 @@ export default defineNuxtConfig({
     },
     css: [
         'vuetify/lib/styles/main.sass',
-        // '@mdi/font/css/materialdesignicons.min.css', todo this might be needed for material icons
+        '@mdi/font/css/materialdesignicons.min.css',
     ],
     build: {
         transpile: ['vuetify'],
     },
     vite: {
         define: {
-            'process.env.DEBUG': false,
+            'process.env.DEBUG': true,
         },
     },
     // @ts-ignore

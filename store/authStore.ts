@@ -1,10 +1,13 @@
 import {defineStore} from "pinia";
 import supabase from "~/supabase/client";
 
+import {User} from "@supabase/gotrue-js";
+
 
 export const useAuthStore = defineStore("authStore", {
     state: () => ({
-        currentUser: {} as any
+        currentUser: {} as User | null,
+        isLoggedIn: false
 
     }),
     actions: {
@@ -21,14 +24,15 @@ export const useAuthStore = defineStore("authStore", {
             if (data) {
                 console.log("data login")
                 console.log(data)
+                this.isLoggedIn = true
                 this.currentUser = data.user
             }
         }
     },
     getters: {
-        getCurrentLoggedUser(): {} {
+        getCurrentLoggedUser(): User | null {
             return this.currentUser
-        }
+        },
 
     }
 })

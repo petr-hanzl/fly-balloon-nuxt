@@ -8,7 +8,8 @@
 import NewBalloon from "~/components/NewBalloon.vue";
 
   definePageMeta({
-    icon: 'mdi-view-dashboard'
+      middleware: ["auth"],
+      icon: 'mdi-view-dashboard'
   })
 
 </script>
