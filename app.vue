@@ -1,11 +1,11 @@
 <template>
-    <v-app>
-        <NuxtLayout>
-            <v-main>
-                <NuxtPage/>
-            </v-main>
-        </NuxtLayout>
-    </v-app>
+  <v-app>
+    <NuxtLayout>
+      <v-main>
+        <NuxtPage />
+      </v-main>
+    </NuxtLayout>
+  </v-app>
 </template>
 
 <script setup lang="ts">

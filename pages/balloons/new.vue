@@ -1,19 +1,18 @@
 <template>
   <v-app>
-      <NewBalloon/>
+    <NewBalloon />
   </v-app>
 </template>
 
 <script setup lang="ts">
-import NewBalloon from "~/components/NewBalloon.vue";
+import NewBalloon from '~/components/NewBalloon.vue'
 
-  definePageMeta({
-      middleware: ["auth"],
-      icon: 'mdi-view-dashboard'
-  })
+definePageMeta({
+  middleware: ['auth'],
+  icon: 'mdi-plus-thick'
+})
 
 </script>
-
 
 <style scoped>
 

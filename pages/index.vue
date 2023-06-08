@@ -1,14 +1,14 @@
 <template>
-    <LoginForm/>
+  <LoginForm />
 </template>
 
 <script setup lang="ts">
 
-    definePageMeta({
-        middleware: ["auth"],
-        excludeFromMenu: true,
-        layout: 'auth'
-    })
+definePageMeta({
+  middleware: ['auth'],
+  excludeFromMenu: true,
+  layout: 'auth'
+})
 
 </script>
 
