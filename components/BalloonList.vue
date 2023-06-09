@@ -1,6 +1,5 @@
 <template>
-  <v-card style="margin: 4rem; padding: 1rem">
-    <v-table theme="light">
+    <v-table theme="light" class="list">
       <thead>
         <tr>
           <th class="text-left">
@@ -44,10 +43,9 @@
         </tr>
       </tbody>
     </v-table>
-    <v-btn size="large" style="position: relative" @click.prevent="navigateTo({path: `/balloons/new`})">
+    <v-btn size="x-large" style="position: relative; margin-left: 1.5rem" @click.prevent="navigateTo({path: `/balloons/new`})">
       New
     </v-btn>
-  </v-card>
 </template>
 
 <script setup lang="ts">
@@ -73,7 +71,7 @@ const isActive = (isActive: boolean | null): string => {
 }
 
 .list {
-    padding: 3rem;
+    padding: 1.5rem;
 }
 
 </style>

@@ -68,13 +68,16 @@ export const useBalloonStore = defineStore('balloonStore', {
         })
       }
       return null
-    }
+    },
+
 
   },
   getters: {
     getBalloons (): Balloon[] {
       return this.balloons
-    }
+    },
+
+
 
   }
 })
