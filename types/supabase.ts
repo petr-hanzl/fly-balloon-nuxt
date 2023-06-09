@@ -59,6 +59,20 @@ export interface Database {
           id?: number
           text?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "actualities_actuality_type_id_fkey"
+            columns: ["actuality_type_id"]
+            referencedRelation: "actuality_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "actualities_creator_id_fkey"
+            columns: ["creator_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       actuality_types: {
         Row: {
@@ -76,6 +90,7 @@ export interface Database {
           id?: number
           type?: string | null
         }
+        Relationships: []
       }
       balloons: {
         Row: {
@@ -102,6 +117,7 @@ export interface Database {
           maximum_capacity?: number | null
           registration_number?: string | null
         }
+        Relationships: []
       }
       cars: {
         Row: {
@@ -131,6 +147,7 @@ export interface Database {
           registration_number?: string | null
           stk_expire?: string | null
         }
+        Relationships: []
       }
       currency_types: {
         Row: {
@@ -148,6 +165,7 @@ export interface Database {
           currency?: string | null
           id?: number
         }
+        Relationships: []
       }
       customers: {
         Row: {
@@ -174,6 +192,84 @@ export interface Database {
           last_name?: string | null
           phone_number?: string | null
         }
+        Relationships: []
+      }
+      driver_licence_types: {
+        Row: {
+          created_at: string | null
+          id: number
+          type: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          type?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          type?: string | null
+        }
+        Relationships: []
+      }
+      drivers: {
+        Row: {
+          created_at: string | null
+          extended_user_id: number | null
+          id: number
+        }
+        Insert: {
+          created_at?: string | null
+          extended_user_id?: number | null
+          id?: number
+        }
+        Update: {
+          created_at?: string | null
+          extended_user_id?: number | null
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drivers_extended_user_id_fkey"
+            columns: ["extended_user_id"]
+            referencedRelation: "extended_users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      drivers_license: {
+        Row: {
+          created_at: string | null
+          drivers_id: number | null
+          id: number
+          licence_id: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          drivers_id?: number | null
+          id?: number
+          licence_id?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          drivers_id?: number | null
+          id?: number
+          licence_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drivers_license_drivers_id_fkey"
+            columns: ["drivers_id"]
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drivers_license_licence_id_fkey"
+            columns: ["licence_id"]
+            referencedRelation: "driver_licence_types"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       expense_types: {
         Row: {
@@ -191,6 +287,7 @@ export interface Database {
           id?: number
           type?: string | null
         }
+        Relationships: []
       }
       expenses: {
         Row: {
@@ -198,6 +295,7 @@ export interface Database {
           created_at: string | null
           currency_type_id: number | null
           expense_type_id: number | null
+          flight_id: number | null
           id: number
           price: string | null
         }
@@ -206,6 +304,7 @@ export interface Database {
           created_at?: string | null
           currency_type_id?: number | null
           expense_type_id?: number | null
+          flight_id?: number | null
           id?: number
           price?: string | null
         }
@@ -214,23 +313,30 @@ export interface Database {
           created_at?: string | null
           currency_type_id?: number | null
           expense_type_id?: number | null
+          flight_id?: number | null
           id?: number
           price?: string | null
         }
-      }
-      extended_user_roles: {
-        Row: {
-          id: number
-          role: string | null
-        }
-        Insert: {
-          id?: number
-          role?: string | null
-        }
-        Update: {
-          id?: number
-          role?: string | null
-        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_currency_type_id_fkey"
+            columns: ["currency_type_id"]
+            referencedRelation: "currency_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_expense_type_id_fkey"
+            columns: ["expense_type_id"]
+            referencedRelation: "expense_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expenses_flight_id_fkey"
+            columns: ["flight_id"]
+            referencedRelation: "flights"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       extended_users: {
         Row: {
@@ -240,9 +346,6 @@ export interface Database {
           is_active: boolean | null
           last_name: string | null
           phone_number: string | null
-          pilots_class: string | null
-          pilots_licence_number: string | null
-          role_id: number | null
           user_id: string | null
         }
         Insert: {
@@ -252,9 +355,6 @@ export interface Database {
           is_active?: boolean | null
           last_name?: string | null
           phone_number?: string | null
-          pilots_class?: string | null
-          pilots_licence_number?: string | null
-          role_id?: number | null
           user_id?: string | null
         }
         Update: {
@@ -264,11 +364,16 @@ export interface Database {
           is_active?: boolean | null
           last_name?: string | null
           phone_number?: string | null
-          pilots_class?: string | null
-          pilots_licence_number?: string | null
-          role_id?: number | null
           user_id?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "extended_users_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       flight_status: {
         Row: {
@@ -286,6 +391,7 @@ export interface Database {
           id?: number
           status?: string | null
         }
+        Relationships: []
       }
       flight_tickets: {
         Row: {
@@ -318,6 +424,20 @@ export interface Database {
           ticket_number?: number | null
           with_accomodation?: boolean | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "flight_tickets_flight_type_id_fkey"
+            columns: ["flight_type_id"]
+            referencedRelation: "flight_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flight_tickets_order_id_fkey"
+            columns: ["order_id"]
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       flight_types: {
         Row: {
@@ -338,6 +458,7 @@ export interface Database {
           maximum_capacity?: number | null
           type?: string | null
         }
+        Relationships: []
       }
       flights: {
         Row: {
@@ -382,6 +503,50 @@ export interface Database {
           pilot_id?: number | null
           timestamp?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "flights_balloon_id_fkey"
+            columns: ["balloon_id"]
+            referencedRelation: "balloons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flights_creator_id_fkey"
+            columns: ["creator_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flights_driver_id_fkey"
+            columns: ["driver_id"]
+            referencedRelation: "drivers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flights_flight_status_id_fkey"
+            columns: ["flight_status_id"]
+            referencedRelation: "flight_status"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flights_flight_type_id_fkey"
+            columns: ["flight_type_id"]
+            referencedRelation: "flight_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flights_location_id_fkey"
+            columns: ["location_id"]
+            referencedRelation: "location_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flights_pilot_id_fkey"
+            columns: ["pilot_id"]
+            referencedRelation: "pilots"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       location_types: {
         Row: {
@@ -399,6 +564,7 @@ export interface Database {
           id?: number
           location?: string | null
         }
+        Relationships: []
       }
       marketing_expenses: {
         Row: {
@@ -425,6 +591,20 @@ export interface Database {
           id?: number
           marketing_type_id?: number | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "marketing_expenses_currency_type_id_fkey"
+            columns: ["currency_type_id"]
+            referencedRelation: "currency_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "marketing_expenses_marketing_type_id_fkey"
+            columns: ["marketing_type_id"]
+            referencedRelation: "marketing_types"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       marketing_revenues: {
         Row: {
@@ -451,6 +631,20 @@ export interface Database {
           marketing_type_id?: number | null
           revenue?: number | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "marketing_revenues_currency_type_id_fkey"
+            columns: ["currency_type_id"]
+            referencedRelation: "currency_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "marketing_revenues_marketing_type_id_fkey"
+            columns: ["marketing_type_id"]
+            referencedRelation: "marketing_types"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       marketing_types: {
         Row: {
@@ -468,6 +662,7 @@ export interface Database {
           id?: number
           type?: string | null
         }
+        Relationships: []
       }
       orders: {
         Row: {
@@ -491,32 +686,39 @@ export interface Database {
           isPaid?: boolean | null
           price?: number | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "orders_customer_id_fkey"
+            columns: ["customer_id"]
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       pilots: {
         Row: {
-          class: string | null
-          created_at: string | null
           extended_user_id: number | null
           id: number
-          licence_expiration: string | null
           licence_number: string | null
         }
         Insert: {
-          class?: string | null
-          created_at?: string | null
           extended_user_id?: number | null
           id?: number
-          licence_expiration?: string | null
           licence_number?: string | null
         }
         Update: {
-          class?: string | null
-          created_at?: string | null
           extended_user_id?: number | null
           id?: number
-          licence_expiration?: string | null
           licence_number?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "pilots_extended_user_id_fkey"
+            columns: ["extended_user_id"]
+            referencedRelation: "extended_users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       reservations: {
         Row: {
@@ -540,6 +742,20 @@ export interface Database {
           id?: number
           is_paid?: boolean | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "reservations_customer_id_fkey"
+            columns: ["customer_id"]
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reservations_flight_id_fkey"
+            columns: ["flight_id"]
+            referencedRelation: "flights"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       time_availability: {
         Row: {
@@ -560,6 +776,14 @@ export interface Database {
           id?: number
           time?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "time_availability_extended_user_id_fkey"
+            columns: ["extended_user_id"]
+            referencedRelation: "extended_users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       voucher_status: {
         Row: {
@@ -577,6 +801,7 @@ export interface Database {
           id?: number
           status?: string | null
         }
+        Relationships: []
       }
       vouchers: {
         Row: {
@@ -606,6 +831,20 @@ export interface Database {
           voucher_number?: string | null
           voucher_status_id?: number | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "vouchers_flight_ticket_id_fkey"
+            columns: ["flight_ticket_id"]
+            referencedRelation: "flight_tickets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "vouchers_voucher_status_id_fkey"
+            columns: ["voucher_status_id"]
+            referencedRelation: "voucher_status"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {
@@ -657,6 +896,14 @@ export interface Database {
           public?: boolean | null
           updated_at?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "buckets_owner_fkey"
+            columns: ["owner"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       migrations: {
         Row: {
@@ -677,6 +924,7 @@ export interface Database {
           id?: number
           name?: string
         }
+        Relationships: []
       }
       objects: {
         Row: {
@@ -715,6 +963,20 @@ export interface Database {
           updated_at?: string | null
           version?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "objects_bucketId_fkey"
+            columns: ["bucket_id"]
+            referencedRelation: "buckets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "objects_owner_fkey"
+            columns: ["owner"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

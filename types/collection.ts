@@ -12,11 +12,14 @@ export type CurrencyType = Database["public"]["Tables"]["currency_types"]["Row"]
 
 export type Customer = Database["public"]["Tables"]["customers"]["Row"]
 
+export type DriverLicenceType = Database["public"]["Tables"]["driver_licence_types"]["Row"]
+export type Driver = Database["public"]["Tables"]["drivers"]["Row"]
+export type DriversLicence = Database["public"]["Tables"]["drivers_license"]["Row"]
+
 export type ExpenseType = Database["public"]["Tables"]["expense_types"]["Row"]
 export type Expense = Database["public"]["Tables"]["expenses"]["Row"]
 
 export type ExtendedUser = Database["public"]["Tables"]["extended_users"]["Row"]
-export type ExtendedUserRole = Database["public"]["Tables"]["extended_user_roles"]["Row"]
 
 export type FlightStatus = Database["public"]["Tables"]["flight_status"]["Row"]
 export type FlightType = Database["public"]["Tables"]["flight_types"]["Row"]
@@ -31,6 +34,8 @@ export type MarketingRevenue = Database["public"]["Tables"]["marketing_revenues"
 export type MarketingType = Database["public"]["Tables"]["marketing_types"]["Row"]
 
 export type Order = Database["public"]["Tables"]["orders"]["Row"]
+
+export type Pilot = Database["public"]["Tables"]["pilots"]["Row"]
 
 export type Reservation = Database["public"]["Tables"]["reservations"]["Row"]
 
