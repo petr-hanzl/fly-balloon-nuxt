@@ -23,6 +23,11 @@
   // todo location
   const headers = [
       {
+          title: "Start",
+          key: "start_time",
+          align: "end"
+      },
+      {
           title: "Type",
           key: "flight_types.type",
           align: "end"
@@ -62,11 +67,7 @@
           key: "flight_types.maximum_capacity",
           align: "end"
       },
-      {
-          title: "Start",
-          key: "start_time",
-          align: "end"
-      },
+
 
   ]
 

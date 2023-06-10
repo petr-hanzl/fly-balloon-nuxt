@@ -1,4 +1,5 @@
 <template>
+    <v-card class="pa-10 ma-10 align-content-center">
     <h1 style="margin: 30px">
         {{title}}
     </h1>
@@ -8,13 +9,14 @@
         :items-length="numberOfItems"
         :items="items"
         :loading="loading"
-        class="elevation-1 ma-7 rounded-xl"
+        class=" ma-7 rounded-xl"
         item-value="name"
         @update:options="loadItems"
     ></VDataTable>
     <v-btn size="x-large" class="mb-5 ml-7 rounded-xl" @click.prevent="navigateTo({path: createPath})">
         New
     </v-btn>
+    </v-card>
 
 
 </template>

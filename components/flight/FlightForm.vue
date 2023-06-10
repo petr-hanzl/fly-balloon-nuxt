@@ -131,22 +131,26 @@
 
   const create = async () => {
       // todo create
-      // const flight = {
-      //     flight_type_id: flightType,
-      //     flight_status_id: flightStatus,
-      //     balloon_id: balloon,
-      //     pilot_id: pilot,
-      //     driver_id: driver,
-      //     car_id: car,
-      //     // location_id: location,
-      //     additional_information: additionalInformation,
-      //
-      // } as Flight
-      //
-      // await flightStore.createFlight(flight)
-      //
+      const flight = {
+          flight_type_id: flightType.value,
+          flight_status_id: flightStatus.value,
+          balloon_id: balloon.value,
+          pilot_id: pilot.value,
+          driver_id: driver.value,
+          car_id: car.value,
+          location_id: 1,
+          additional_information: additionalInformation.value,
+          current_capacity: 0,
+          start_time: start.value
+
+      } as Flight
+
+      console.log(flight)
+
+      await flightStore.createFlight(flight)
+
       // navigateTo({path:"/flights"})
-      // flightStore.flights.push(flight)
+      flightStore.flights.push(flight)
   }
 
 </script>

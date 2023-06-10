@@ -34,6 +34,15 @@ export const useFlightStore = defineStore('flightStore', {
         console.log(error)
       }
       if (data) {
+        let date: Date
+        let hours: number
+        let minutes: string
+        data.forEach((d)=> {
+          date = new Date(d.start_time)
+          hours = date.getHours();
+          minutes = "0" + date.getMinutes();
+          d.start_time = date.toDateString() + ' ' + hours + ':' + minutes.substring(1)
+        })
         this.flights = data
         console.log(data)
       }
@@ -73,8 +82,8 @@ export const useFlightStore = defineStore('flightStore', {
         .from('flights')
         .insert(flight)
       if (error) {
-        console.log('error')
-        console.log(error)
+        console.log('create flight error')
+        console.log(JSON.stringify(error, null, 2))
       }
     },
 
