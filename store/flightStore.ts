@@ -1,25 +1,11 @@
 import { defineStore } from 'pinia'
 import supabase from '~/supabase/client'
 import { Flight, FlightStatus, FlightTicket, FlightType } from '~/types/collection'
-import {th} from "vuetify/locale";
 
-type FlightList = {
-    type: string,
-    status: string,
-    balloon: string,
-    pilot: string | null,
-    driver: string,
-    additionalInformation: string | null,
-    maxCapacity: number,
-    currentCapacity: number,
-    start: string,
-
-  }
 
 export const useFlightStore = defineStore('flightStore', {
   state: () => ({
     flights: [] as Flight[],
-    flightsList: [] as FlightList[],
     flightTypes: [] as FlightType[],
     flightStatus: [] as FlightStatus[],
     flightTickets: [] as FlightTicket[],
@@ -29,7 +15,7 @@ export const useFlightStore = defineStore('flightStore', {
     async fetchFlights(force: boolean) {
       // do we need to fetch?
       // this prevents repeated loading and appending same items
-      if (!force && this.flightsList && this.flightsList.length > 0) {
+      if (!force && this.flights && this.flights.length > 0) {
         return
       }
 
@@ -48,20 +34,8 @@ export const useFlightStore = defineStore('flightStore', {
         console.log(error)
       }
       if (data) {
-        data.forEach((d)=> {
-          this.flightsList.push({
-            type: d.flight_types!.type,
-            status: d.flight_status!.status,
-            balloon: d.balloons!.registration_number,
-            pilot: d.pilots!.extended_users!.first_name + " " + d.pilots!.extended_users!.last_name,
-            driver: d.drivers!.extended_users!.first_name + " " + d.drivers!.extended_users!.last_name,
-            additionalInformation: d.additional_information,
-            maxCapacity: d.flight_types!.maximum_capacity,
-            currentCapacity: d.current_capacity,
-            start: d.start_time
-          })
-
-        })
+        this.flights = data
+        console.log(data)
       }
 
 
@@ -130,7 +104,7 @@ export const useFlightStore = defineStore('flightStore', {
     },
 
     // flight types
-    async fetchAllFlightTypes (force: boolean) {
+    async fetchAllFlightTypes(force: boolean) {
       // do we need to fetch?
       if (!force && this.flightTypes && this.flightTypes.length > 0) {
         return
@@ -303,9 +277,6 @@ export const useFlightStore = defineStore('flightStore', {
   getters: {
     getFlights (): Flight[] {
       return this.flights
-    },
-    getFlightList (): FlightList[] {
-      return this.flightsList
     },
     getFlightTypes (): FlightType[] {
       return this.flightTypes

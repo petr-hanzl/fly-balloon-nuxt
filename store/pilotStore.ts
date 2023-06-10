@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import supabase from '~/supabase/client'
-import { Pilot } from '~/types/collection'
+import {ExtendedUser, Pilot} from '~/types/collection'
 
 export const usePilotStore = defineStore('pilotStore', {
     state: () => ({
@@ -8,7 +8,7 @@ export const usePilotStore = defineStore('pilotStore', {
 
     }),
     actions: {
-        async fetchAllPilots (force: boolean) {
+        async fetchAllPilots(force: boolean) {
             // do we need to fetch?
             if (!force && this.pilots && this.pilots.length > 0) {
                 return
@@ -16,14 +16,16 @@ export const usePilotStore = defineStore('pilotStore', {
 
             const { data, error } = await supabase
                 .from('pilots')
-                .select()
+                .select(`*, extended_users(*)`)
             if (error) {
                 console.log('pilot store err')
                 console.log(error)
             }
 
             if (data) {
+
                 this.pilots = data
+
             }
         },
 
@@ -68,6 +70,7 @@ export const usePilotStore = defineStore('pilotStore', {
         getPilots (): Pilot[] {
             return this.pilots
         },
+
 
     }
 })

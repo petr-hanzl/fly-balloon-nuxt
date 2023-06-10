@@ -23,8 +23,6 @@ export const useLocationTypeStore = defineStore('locationTypeStore', {
       }
 
       if (data) {
-        console.log('data')
-        console.log(data)
         this.locationTypes = data
       }
     },

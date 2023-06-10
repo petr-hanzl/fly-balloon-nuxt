@@ -1,7 +1,7 @@
 <template>
     <List
             :headers="headers"
-            :items="flightStore.getFlightList"
+            :items="flightStore.getFlights"
             :fetch-callback="flightStore.fetchFlights"
             title="Flights"
             create-path="/flights/new"
@@ -24,47 +24,47 @@
   const headers = [
       {
           title: "Type",
-          key: "type",
+          key: "flight_types.type",
           align: "end"
       },
       {
           title: "Status",
-          key: "status",
+          key: "flight_status.status",
           align: "end"
       },
       {
           title: "Balloon",
-          key: "balloon",
+          key: "balloons.registration_number",
           align: "end"
       },
       {
           title: "Pilot",
-          key: "pilot",
+          key: "pilots.extended_users.first_name",
           align: "end"
       },
       {
           title: "Driver",
-          key: "driver",
+          key: "drivers.extended_users.first_name",
           align: "end"
       },
       {
           title: "Additional information",
-          key: "additionalInformation",
+          key: "additional_information",
           align: "end"
       },
       {
           title: "Current capacity",
-          key: "currentCapacity",
+          key: "current_capacity",
           align: "end"
       },
       {
           title: "Max capacity",
-          key: "maxCapacity",
+          key: "flight_types.maximum_capacity",
           align: "end"
       },
       {
           title: "Start",
-          key: "start",
+          key: "start_time",
           align: "end"
       },
 

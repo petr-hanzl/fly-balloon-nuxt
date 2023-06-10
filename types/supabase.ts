@@ -699,17 +699,17 @@ export interface Database {
         Row: {
           extended_user_id: number
           id: number
-          licence_number: string | null
+          licence_number: string
         }
         Insert: {
           extended_user_id: number
           id?: number
-          licence_number?: string | null
+          licence_number: string
         }
         Update: {
           extended_user_id?: number
           id?: number
-          licence_number?: string | null
+          licence_number?: string
         }
         Relationships: [
           {

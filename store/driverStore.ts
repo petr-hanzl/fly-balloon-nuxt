@@ -16,7 +16,7 @@ export const useDriverStore = defineStore('driverStore', {
 
             const { data, error } = await supabase
                 .from('drivers')
-                .select()
+                .select('*, extended_users(*)')
             if (error) {
                 console.log('driver store err')
                 console.log(error)
@@ -24,6 +24,7 @@ export const useDriverStore = defineStore('driverStore', {
 
             if (data) {
                 this.drivers = data
+                console.log(this.drivers)
             }
         },
 
