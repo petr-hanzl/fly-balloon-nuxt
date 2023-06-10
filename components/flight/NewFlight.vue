@@ -38,6 +38,16 @@
                         required
                     />
                     <v-select
+                        v-model="car"
+                        class="form-field"
+                        :items="carStore.getCars"
+                        item-title="name"
+                        item-value="id"
+                        :rules="rules"
+                        label="Car"
+                        required
+                    />
+                    <v-select
                         v-model="location"
                         class="form-field"
                         :items="locationStore.getLocationTypes"
@@ -92,17 +102,19 @@
 
 <script setup lang="ts">
   import {useFlightStore} from "~/store/flightStore";
-  import {Balloon, Driver, Flight, FlightStatus, FlightType, LocationType, Pilot} from "~/types/collection";
+  import {Balloon, Car, Driver, Flight, FlightStatus, FlightType, LocationType, Pilot} from "~/types/collection";
   import {useBalloonStore} from "~/store/balloonStore";
   import {useLocationTypeStore} from "~/store/locationTypeStore";
   import {usePilotStore} from "~/store/pilotStore";
   import {useDriverStore} from "~/store/driverStore";
+  import {useCarStore} from "~/store/carsStore";
 
   const flightStore = useFlightStore()
   const balloonStore = useBalloonStore()
   const locationStore = useLocationTypeStore()
   const pilotStore = usePilotStore()
   const driverStore = useDriverStore()
+  const carStore = useCarStore()
 
   await flightStore.fetchAllFlightTypes(false)
   await flightStore.fetchALlFlightStatus(false)
@@ -110,12 +122,14 @@
   await locationStore.fetchAllLocationTypes(false)
   await pilotStore.fetchAllPilots(false)
   await driverStore.fetchAllDrivers(false)
+  await carStore.fetchAllCars(false)
 
   const rules = [v => !!v || 'Item is required']
 
   const flightType = ref<FlightType>()
   const flightStatus = ref<FlightStatus>()
   const balloon = ref<Balloon>()
+  const car = ref<Car>()
   const additionalInformation = ref('')
   const location = ref<LocationType>()
   const pilot = ref<Pilot>()

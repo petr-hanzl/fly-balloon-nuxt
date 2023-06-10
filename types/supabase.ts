@@ -464,6 +464,7 @@ export interface Database {
         Row: {
           additional_information: string | null
           balloon_id: number
+          car_id: number
           created_at: string | null
           creator_id: string | null
           current_capacity: number
@@ -478,6 +479,7 @@ export interface Database {
         Insert: {
           additional_information?: string | null
           balloon_id: number
+          car_id: number
           created_at?: string | null
           creator_id?: string | null
           current_capacity?: number
@@ -492,6 +494,7 @@ export interface Database {
         Update: {
           additional_information?: string | null
           balloon_id?: number
+          car_id?: number
           created_at?: string | null
           creator_id?: string | null
           current_capacity?: number
@@ -508,6 +511,12 @@ export interface Database {
             foreignKeyName: "flights_balloon_id_fkey"
             columns: ["balloon_id"]
             referencedRelation: "balloons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flights_car_id_fkey"
+            columns: ["car_id"]
+            referencedRelation: "cars"
             referencedColumns: ["id"]
           },
           {
