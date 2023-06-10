@@ -1,11 +1,9 @@
 <template>
-  <v-app>
     <NewBalloon />
-  </v-app>
 </template>
 
 <script setup lang="ts">
-import NewBalloon from '~/components/NewBalloon.vue'
+import NewBalloon from '~/components/balloon/BalloonForm.vue'
 
   definePageMeta({
       middleware: ['auth'],

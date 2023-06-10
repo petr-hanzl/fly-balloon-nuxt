@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import NewFlight from "~/components/flight/NewFlight.vue";
+import NewFlight from "~/components/flight/FlightForm.vue";
 
   definePageMeta({
       middleware: ['auth'],
