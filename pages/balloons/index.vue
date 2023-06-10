@@ -1,12 +1,10 @@
 <template>
-    <h1 style="margin: 30px">
-        BALOONS
-    </h1>
 
     <List
             :headers="headers"
             :items="balloonStore.getBalloons"
             :fetch-callback="balloonStore.fetchAllBalloons"
+            title="Balloons"
             create-path="/balloons/new"
     />
 

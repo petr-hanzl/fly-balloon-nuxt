@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import supabase from '~/supabase/client'
 import { Flight, FlightStatus, FlightTicket, FlightType } from '~/types/collection'
+import {th} from "vuetify/locale";
 
 type FlightList = {
     type: string,
@@ -27,11 +28,9 @@ export const useFlightStore = defineStore('flightStore', {
   actions: {
     async fetchFlights(force: boolean) {
       // do we need to fetch?
-      if (!force && this.flights) {
-        if (this.flights.length > 0) {
-          // todo WTF why cant i put this on same line????
-          return
-        }
+      // this prevents repeated loading and appending same items
+      if (!force && this.flightsList && this.flightsList.length > 0) {
+        return
       }
 
       const { data, error } = await supabase

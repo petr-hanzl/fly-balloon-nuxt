@@ -1,12 +1,9 @@
 <template>
-    <h1 style="margin: 30px">
-        Flights
-    </h1>
-
     <List
             :headers="headers"
             :items="flightStore.getFlightList"
             :fetch-callback="flightStore.fetchFlights"
+            title="Flights"
             create-path="/flights/new"
     />
 

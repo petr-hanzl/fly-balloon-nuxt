@@ -1,4 +1,7 @@
 <template>
+    <h1 style="margin: 30px">
+        {{title}}
+    </h1>
 <!--  todo search-->
     <VDataTable
         :headers="headers"
@@ -25,7 +28,8 @@
       items: any[],
       headers,
       fetchCallback: Function,
-      createPath: string
+      createPath: string,
+      title: string
   }
 
   const props = defineProps<Props>()
