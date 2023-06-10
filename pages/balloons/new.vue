@@ -7,10 +7,12 @@
 <script setup lang="ts">
 import NewBalloon from '~/components/NewBalloon.vue'
 
-definePageMeta({
-  middleware: ['auth'],
-  icon: 'mdi-plus-thick'
-})
+  definePageMeta({
+      middleware: ['auth'],
+      icon: 'mdi-plus-thick',
+      excludeFromMenu: true,
+
+  })
 
 </script>
 

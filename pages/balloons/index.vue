@@ -16,8 +16,9 @@
   import {useBalloonStore} from "~/store/balloonStore";
 
   definePageMeta({
-    middleware: ['auth'],
-    icon: 'mdi-airballoon'
+      middleware: ['auth'],
+      icon: 'mdi-airballoon',
+      name: "Balloons"
   })
 
   const balloonStore = useBalloonStore()

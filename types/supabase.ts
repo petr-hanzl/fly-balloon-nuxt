@@ -97,25 +97,25 @@ export interface Database {
           additional_information: string | null
           created_at: string | null
           id: number
-          is_active: boolean | null
-          maximum_capacity: number | null
-          registration_number: string | null
+          is_active: boolean
+          maximum_capacity: number
+          registration_number: string
         }
         Insert: {
           additional_information?: string | null
           created_at?: string | null
           id?: number
-          is_active?: boolean | null
-          maximum_capacity?: number | null
-          registration_number?: string | null
+          is_active?: boolean
+          maximum_capacity?: number
+          registration_number: string
         }
         Update: {
           additional_information?: string | null
           created_at?: string | null
           id?: number
-          is_active?: boolean | null
-          maximum_capacity?: number | null
-          registration_number?: string | null
+          is_active?: boolean
+          maximum_capacity?: number
+          registration_number?: string
         }
         Relationships: []
       }
@@ -215,17 +215,17 @@ export interface Database {
       drivers: {
         Row: {
           created_at: string | null
-          extended_user_id: number | null
+          extended_user_id: number
           id: number
         }
         Insert: {
           created_at?: string | null
-          extended_user_id?: number | null
+          extended_user_id: number
           id?: number
         }
         Update: {
           created_at?: string | null
-          extended_user_id?: number | null
+          extended_user_id?: number
           id?: number
         }
         Relationships: [
@@ -341,30 +341,30 @@ export interface Database {
       extended_users: {
         Row: {
           created_at: string | null
-          first_name: string | null
+          first_name: string
           id: number
           is_active: boolean | null
-          last_name: string | null
-          phone_number: string | null
-          user_id: string | null
+          last_name: string
+          phone_number: string
+          user_id: string
         }
         Insert: {
           created_at?: string | null
-          first_name?: string | null
+          first_name: string
           id?: number
           is_active?: boolean | null
-          last_name?: string | null
-          phone_number?: string | null
-          user_id?: string | null
+          last_name: string
+          phone_number: string
+          user_id: string
         }
         Update: {
           created_at?: string | null
-          first_name?: string | null
+          first_name?: string
           id?: number
           is_active?: boolean | null
-          last_name?: string | null
-          phone_number?: string | null
-          user_id?: string | null
+          last_name?: string
+          phone_number?: string
+          user_id?: string
         }
         Relationships: [
           {
@@ -379,17 +379,17 @@ export interface Database {
         Row: {
           created_at: string | null
           id: number
-          status: string | null
+          status: string
         }
         Insert: {
           created_at?: string | null
           id?: number
-          status?: string | null
+          status: string
         }
         Update: {
           created_at?: string | null
           id?: number
-          status?: string | null
+          status?: string
         }
         Relationships: []
       }
@@ -443,65 +443,65 @@ export interface Database {
         Row: {
           created_at: string | null
           id: number
-          maximum_capacity: number | null
-          type: string | null
+          maximum_capacity: number
+          type: string
         }
         Insert: {
           created_at?: string | null
           id?: number
-          maximum_capacity?: number | null
-          type?: string | null
+          maximum_capacity: number
+          type: string
         }
         Update: {
           created_at?: string | null
           id?: number
-          maximum_capacity?: number | null
-          type?: string | null
+          maximum_capacity?: number
+          type?: string
         }
         Relationships: []
       }
       flights: {
         Row: {
           additional_information: string | null
-          balloon_id: number | null
+          balloon_id: number
           created_at: string | null
           creator_id: string | null
-          driver_id: number | null
-          flight_status_id: number | null
-          flight_type_id: number | null
+          current_capacity: number
+          driver_id: number
+          flight_status_id: number
+          flight_type_id: number
           id: number
-          is_full: boolean | null
-          location_id: number | null
-          pilot_id: number | null
-          timestamp: string | null
+          location_id: number
+          pilot_id: number
+          start_time: string
         }
         Insert: {
           additional_information?: string | null
-          balloon_id?: number | null
+          balloon_id: number
           created_at?: string | null
           creator_id?: string | null
-          driver_id?: number | null
-          flight_status_id?: number | null
-          flight_type_id?: number | null
+          current_capacity?: number
+          driver_id: number
+          flight_status_id: number
+          flight_type_id: number
           id?: number
-          is_full?: boolean | null
-          location_id?: number | null
-          pilot_id?: number | null
-          timestamp?: string | null
+          location_id: number
+          pilot_id: number
+          start_time: string
         }
         Update: {
           additional_information?: string | null
-          balloon_id?: number | null
+          balloon_id?: number
           created_at?: string | null
           creator_id?: string | null
-          driver_id?: number | null
-          flight_status_id?: number | null
-          flight_type_id?: number | null
+          current_capacity?: number
+          driver_id?: number
+          flight_status_id?: number
+          flight_type_id?: number
           id?: number
-          is_full?: boolean | null
-          location_id?: number | null
-          pilot_id?: number | null
-          timestamp?: string | null
+          location_id?: number
+          pilot_id?: number
+          start_time?: string
         }
         Relationships: [
           {
@@ -697,17 +697,17 @@ export interface Database {
       }
       pilots: {
         Row: {
-          extended_user_id: number | null
+          extended_user_id: number
           id: number
           licence_number: string | null
         }
         Insert: {
-          extended_user_id?: number | null
+          extended_user_id: number
           id?: number
           licence_number?: string | null
         }
         Update: {
-          extended_user_id?: number | null
+          extended_user_id?: number
           id?: number
           licence_number?: string | null
         }

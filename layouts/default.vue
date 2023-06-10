@@ -16,10 +16,10 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({})
-const routes = useRouter().getRoutes()
-const inMenuRoutes = routes.filter(route => !route.meta.excludeFromMenu)
-console.log(inMenuRoutes)
+  definePageMeta({})
+  const routes = useRouter().getRoutes()
+  const inMenuRoutes = routes.filter(route => !route.meta.excludeFromMenu)
+  console.log(inMenuRoutes)
 
 </script>
 

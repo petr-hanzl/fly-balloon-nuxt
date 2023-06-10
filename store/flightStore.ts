@@ -2,15 +2,76 @@ import { defineStore } from 'pinia'
 import supabase from '~/supabase/client'
 import { Flight, FlightStatus, FlightTicket, FlightType } from '~/types/collection'
 
+type FlightList = {
+    type: string,
+    status: string,
+    balloon: string,
+    pilot: string | null,
+    driver: string,
+    additionalInformation: string | null,
+    maxCapacity: number,
+    currentCapacity: number,
+    start: string,
+
+  }
+
 export const useFlightStore = defineStore('flightStore', {
   state: () => ({
     flights: [] as Flight[],
+    flightsList: [] as FlightList[],
     flightTypes: [] as FlightType[],
     flightStatus: [] as FlightStatus[],
-    flightTickets: [] as FlightTicket[]
+    flightTickets: [] as FlightTicket[],
 
   }),
   actions: {
+    async fetchFlights(force: boolean) {
+      // do we need to fetch?
+      if (!force && this.flights) {
+        if (this.flights.length > 0) {
+          // todo WTF why cant i put this on same line????
+          return
+        }
+      }
+
+      const { data, error } = await supabase
+          .from('flights')
+          .select(
+              `*, 
+              flight_types(type, maximum_capacity), 
+              flight_status(status),
+              balloons(registration_number), 
+              pilots(extended_users(first_name, last_name)),
+              drivers(extended_users(first_name, last_name))`
+          )
+      if (error) {
+        console.log('error')
+        console.log(error)
+      }
+      if (data) {
+        data.forEach((d)=> {
+          this.flightsList.push({
+            type: d.flight_types!.type,
+            status: d.flight_status!.status,
+            balloon: d.balloons!.registration_number,
+            pilot: d.pilots!.extended_users!.first_name + " " + d.pilots!.extended_users!.last_name,
+            driver: d.drivers!.extended_users!.first_name + " " + d.drivers!.extended_users!.last_name,
+            additionalInformation: d.additional_information,
+            maxCapacity: d.flight_types!.maximum_capacity,
+            currentCapacity: d.current_capacity,
+            start: d.start_time
+          })
+
+        })
+      }
+
+
+
+
+      // return list
+
+    },
+
     // flights
     async fetchAllFlights (force: boolean) {
       // do we need to fetch?
@@ -30,9 +91,6 @@ export const useFlightStore = defineStore('flightStore', {
       }
 
       if (data) {
-        console.log('data')
-        console.log(data)
-
         this.flights = data
       }
     },
@@ -88,9 +146,6 @@ export const useFlightStore = defineStore('flightStore', {
       }
 
       if (data) {
-        console.log('data')
-        console.log(data)
-
         this.flightTypes = data
       }
     },
@@ -119,7 +174,7 @@ export const useFlightStore = defineStore('flightStore', {
         .eq('id', flightTypeID)
     },
 
-    getFlightTypeByID (flightTypeID: number) {
+    getFlightTypeByID (flightTypeID: number): FlightType | null {
       if (this.flightTypes && this.flightTypes.length > 0) {
         this.flightTypes.forEach((flightType) => {
           if (flightType.id == flightTypeID) {
@@ -150,9 +205,6 @@ export const useFlightStore = defineStore('flightStore', {
       }
 
       if (data) {
-        console.log('data')
-        console.log(data)
-
         this.flightStatus = data
       }
     },
@@ -181,7 +233,7 @@ export const useFlightStore = defineStore('flightStore', {
         .eq('id', flightStatusID)
     },
 
-    getFlightStatusByID (flightStatusID: number) {
+    getFlightStatusByID (flightStatusID: number): FlightStatus | null {
       if (this.flightStatus && this.flightStatus.length > 0) {
         this.flightStatus.forEach((flightStatus) => {
           if (flightStatus.id == flightStatusID) {
@@ -252,6 +304,9 @@ export const useFlightStore = defineStore('flightStore', {
   getters: {
     getFlights (): Flight[] {
       return this.flights
+    },
+    getFlightList (): FlightList[] {
+      return this.flightsList
     },
     getFlightTypes (): FlightType[] {
       return this.flightTypes
