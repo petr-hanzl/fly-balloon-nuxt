@@ -14,13 +14,6 @@
         item-value="name"
         @update:options="loadItems"
     >
-        <template v-slot:item.flight_status.status="{ item }">
-            <v-chip :color="getColorCallback(item.columns.flight_status.status)">
-                {{ item.columns.flight_status.status }}
-            </v-chip>
-
-        </template>
-
     </VDataTable>
     <v-btn size="x-large" class="mb-5 ml-7 rounded-xl" @click.prevent="navigateTo({path: createPath})">
         New
@@ -41,7 +34,6 @@
       fetchCallback: Function,
       createPath: string,
       title: string,
-      getColorCallback: Function
   }
 
   const props = defineProps<Props>()

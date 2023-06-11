@@ -5,6 +5,12 @@
 
 <script setup lang="ts">
 
+    definePageMeta({
+        middleware: ['auth'],
+        icon: 'mdi-cloud',
+        name: "Flights",
+    })
+
 
 </script>
 
