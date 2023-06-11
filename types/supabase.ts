@@ -675,27 +675,36 @@ export interface Database {
       }
       orders: {
         Row: {
-          created_at: string | null
-          customer_id: number | null
+          created_at: string
+          currency_type_id: number
+          customer_id: number
           id: number
-          isPaid: boolean | null
-          price: number | null
+          isPaid: boolean
+          price: number
         }
         Insert: {
-          created_at?: string | null
-          customer_id?: number | null
+          created_at?: string
+          currency_type_id: number
+          customer_id: number
           id?: number
-          isPaid?: boolean | null
-          price?: number | null
+          isPaid?: boolean
+          price: number
         }
         Update: {
-          created_at?: string | null
-          customer_id?: number | null
+          created_at?: string
+          currency_type_id?: number
+          customer_id?: number
           id?: number
-          isPaid?: boolean | null
-          price?: number | null
+          isPaid?: boolean
+          price?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "orders_currency_type_id_fkey"
+            columns: ["currency_type_id"]
+            referencedRelation: "currency_types"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "orders_customer_id_fkey"
             columns: ["customer_id"]
@@ -769,7 +778,8 @@ export interface Database {
       salaries: {
         Row: {
           created_at: string | null
-          currency_type_id: number | null
+          currency_type_id: number
+          expense_id: number | null
           extended_user_id: number
           flight_id: number | null
           id: number
@@ -777,7 +787,8 @@ export interface Database {
         }
         Insert: {
           created_at?: string | null
-          currency_type_id?: number | null
+          currency_type_id?: number
+          expense_id?: number | null
           extended_user_id: number
           flight_id?: number | null
           id?: number
@@ -785,7 +796,8 @@ export interface Database {
         }
         Update: {
           created_at?: string | null
-          currency_type_id?: number | null
+          currency_type_id?: number
+          expense_id?: number | null
           extended_user_id?: number
           flight_id?: number | null
           id?: number
@@ -796,6 +808,12 @@ export interface Database {
             foreignKeyName: "salaries_currency_type_id_fkey"
             columns: ["currency_type_id"]
             referencedRelation: "currency_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "salaries_expense_id_fkey"
+            columns: ["expense_id"]
+            referencedRelation: "expenses"
             referencedColumns: ["id"]
           },
           {

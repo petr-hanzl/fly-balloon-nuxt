@@ -37,6 +37,7 @@ export const useFlightStore = defineStore('flightStore', {
         let date: Date
         let hours: number
         let minutes: string
+
         data.forEach((d)=> {
           date = new Date(d.start_time)
           hours = date.getHours();
@@ -44,6 +45,8 @@ export const useFlightStore = defineStore('flightStore', {
           d.start_time = date.toDateString() + ' ' + hours + ':' + minutes.substring(1)
         })
         this.flights = data
+
+
       }
 
 
