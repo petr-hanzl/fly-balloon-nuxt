@@ -1,8 +1,8 @@
 <template>
     <v-card class="pa-10 ma-10">
-        <h1>
+        <p class="text-h3 pb-6">
             Create New Flight
-        </h1>
+        </p>
 
         <v-sheet width="300" class="mx-auto">
             <v-form fast-fail @submit.prevent="create">
