@@ -1,19 +1,18 @@
 <template>
-    <v-card class="pa-10 ma-10 align-content-center">
-        <p class="text-h3 pb-6">
-            Flights
-        </p>
+    <p class="text-h3 pb-6">
+        Flights
+    </p>
 
-        <List
-            :headers="headers"
-            :items="flightStore.getFlights"
-            :fetch-callback="flightStore.fetchFlights"
-            title="Flights"
-        />
-        <v-btn size="x-large" class="mb-5 ml-7 rounded-xl" @click.prevent="navigateTo({path: createPath})">
-            New
-        </v-btn>
-    </v-card>
+    <List
+        :headers="headers"
+        :items="flightStore.getFlights"
+        :fetch-callback="flightStore.fetchFlights"
+        title="Flights"
+    />
+
+    <v-btn size="x-large" class="mb-5 ml-7 rounded-xl" @click.prevent="navigateTo({path: `/flights/new`})">
+        New
+    </v-btn>
 
 </template>
 
