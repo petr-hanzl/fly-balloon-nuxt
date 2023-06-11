@@ -39,6 +39,12 @@
       name: "Flights",
   })
 
+interface Props {
+    showNewBtn: boolean
+}
+
+const props = defineProps<Props>()
+
   let numberOfItems: number
   let loading: boolean
 
