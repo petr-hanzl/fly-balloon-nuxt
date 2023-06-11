@@ -1,13 +1,12 @@
 <template>
-  {{flight}}
+  {{flight.drivers.extended_users.first_name}}
 </template>
 
 <script setup lang="ts">
-
-  import FlightList from "~/components/flight/FlightList.vue";
+  import {Flight} from "~/types/collection.ts";
 
   interface Props {
-      flight: FlightList
+      flight: Flight
   }
 
   const props = defineProps<Props>()
