@@ -19,7 +19,7 @@
                     v-model="flightStatusRef"
                     :items="flightStore.getFlightStatus"
                     item-title="status"
-                    item-value="id"
+                    return-object
                     :rules="rules"
                     label="Status"
                     required
@@ -115,8 +115,11 @@
   import supabase from "~/supabase/client";
 
   // todo move this to db
-  const driversSalaryValue = 800
-  const pilotsSalaryValue = 7500
+  const driversFlySalaryValue = 800
+  const pilotsFlySalaryValue = 7500
+  const driversCanceledSalaryValue = 200
+  const pilotsCanceledSalaryValue = 1000
+
   const czkID = 1
   const salaryExpenseType = 5
 
@@ -156,7 +159,7 @@
 
       const flight = {
           flight_type_id: flightTypeRef.value,
-          flight_status_id: flightStatusRef.value,
+          flight_status_id: flightStatusRef.value?.id,
           balloon_id: balloonRef.value,
           pilot_id: pilotRef.value?.id,
           driver_id: driverRef.value?.id,
@@ -174,29 +177,60 @@
       navigateTo({path:"/flights"})
 
 
+      // decide whether create salary depending on the status of the flight
+      switch (flightStatusRef.value?.status) {
+          case "Done":
+              await salaryStore.createSalary({
+                  flight_id: data.at(0).id,
+                  extended_user_id: pilotRef.value?.extended_user_id,
+                  salary: pilotsFlySalaryValue,
+                  currency_type_id: czkID
+              } as Salary)
 
-      // and then save salaries
-      await salaryStore.createSalary({
-          flight_id: data.at(0).id,
-          extended_user_id: pilotRef.value?.extended_user_id,
-          salary: pilotsSalaryValue,
-          currency_type_id: czkID
-      } as Salary)
+              await salaryStore.createSalary({
+                  flight_id: data.at(0).id,
+                  extended_user_id: driverRef.value?.extended_user_id,
+                  salary: driversFlySalaryValue,
+                  currency_type_id: czkID
+              } as Salary)
 
-      await salaryStore.createSalary({
-          flight_id: data.at(0).id,
-          extended_user_id: driverRef.value?.extended_user_id,
-          salary: driversSalaryValue,
-          currency_type_id: czkID
-      } as Salary)
+              // save expense last
+              await expenseStore.createExpense({
+                  price: pilotsFlySalaryValue + driversFlySalaryValue,
+                  expense_type_id: salaryExpenseType,
+                  currency_type_id: czkID,
+                  additional_information: "Normal flight salaries for both pilot and driver"
+              } as Expense)
+              break;
+          case "Canceled_on_spot":
+              await salaryStore.createSalary({
+                  flight_id: data.at(0).id,
+                  extended_user_id: pilotRef.value?.extended_user_id,
+                  salary: pilotsCanceledSalaryValue,
+                  currency_type_id: czkID
+              } as Salary)
 
-      // save expense last
-      await expenseStore.createExpense({
-          price: driversSalaryValue + pilotsSalaryValue,
-          expense_type_id: salaryExpenseType,
-          currency_type_id: czkID,
-          additional_information: "Normal flight salaries for both pilot and driver"
-      } as Expense)
+              await salaryStore.createSalary({
+                  flight_id: data.at(0).id,
+                  extended_user_id: driverRef.value?.extended_user_id,
+                  salary: driversCanceledSalaryValue,
+                  currency_type_id: czkID
+              } as Salary)
+
+              // save expense last
+              await expenseStore.createExpense({
+                  price: pilotsCanceledSalaryValue + driversCanceledSalaryValue,
+                  expense_type_id: salaryExpenseType,
+                  currency_type_id: czkID,
+                  additional_information: "Normal flight salaries for both pilot and driver"
+              } as Expense)
+              break;
+          default:
+              break;
+
+
+      }
+
   }
 
       // if (data) {
