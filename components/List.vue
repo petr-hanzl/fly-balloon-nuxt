@@ -42,7 +42,8 @@
   const loadItems = async () => {
       // loading = true todo how with async?
 
-      await props.fetchCallback()
+      // force fetch all flights
+      await props.fetchCallback(true)
       numberOfItems = props.items.length // todo dunno
 
       // loading = false todo this is not being called

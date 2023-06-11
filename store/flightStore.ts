@@ -44,7 +44,6 @@ export const useFlightStore = defineStore('flightStore', {
           d.start_time = date.toDateString() + ' ' + hours + ':' + minutes.substring(1)
         })
         this.flights = data
-        console.log(data)
       }
 
 
@@ -78,12 +77,16 @@ export const useFlightStore = defineStore('flightStore', {
     },
 
     async createFlight (flight: Flight) {
-      const { error } = await supabase
-        .from('flights')
-        .insert(flight)
+      const { data, error } = await supabase
+          .from('flights')
+          .insert(flight)
+          .select('*')
       if (error) {
         console.log('create flight error')
         console.log(JSON.stringify(error, null, 2))
+      }
+      if (data) {
+        return data
       }
     },
 

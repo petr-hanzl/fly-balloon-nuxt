@@ -19,7 +19,7 @@
   definePageMeta({})
   const routes = useRouter().getRoutes()
   const inMenuRoutes = routes.filter(route => !route.meta.excludeFromMenu)
-  console.log(inMenuRoutes)
+  // console.log(inMenuRoutes)
 
 </script>
 

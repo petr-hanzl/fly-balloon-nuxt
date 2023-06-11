@@ -766,6 +766,52 @@ export interface Database {
           }
         ]
       }
+      salaries: {
+        Row: {
+          created_at: string | null
+          currency_type_id: number | null
+          extended_user_id: number
+          flight_id: number | null
+          id: number
+          salary: number
+        }
+        Insert: {
+          created_at?: string | null
+          currency_type_id?: number | null
+          extended_user_id: number
+          flight_id?: number | null
+          id?: number
+          salary: number
+        }
+        Update: {
+          created_at?: string | null
+          currency_type_id?: number | null
+          extended_user_id?: number
+          flight_id?: number | null
+          id?: number
+          salary?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "salaries_currency_type_id_fkey"
+            columns: ["currency_type_id"]
+            referencedRelation: "currency_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "salaries_extended_user_id_fkey"
+            columns: ["extended_user_id"]
+            referencedRelation: "extended_users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "salaries_flight_id_fkey"
+            columns: ["flight_id"]
+            referencedRelation: "flights"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       time_availability: {
         Row: {
           created_at: string | null

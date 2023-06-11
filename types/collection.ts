@@ -1,5 +1,4 @@
 import {Database} from "~/types/supabase";
-import WebSocket_2 from "vite";
 
 export type Actuality = Database["public"]["Tables"]["actualities"]["Row"]
 export type ActualityType = Database["public"]["Tables"]["actuality_types"]["Row"]
@@ -38,6 +37,8 @@ export type Order = Database["public"]["Tables"]["orders"]["Row"]
 export type Pilot = Database["public"]["Tables"]["pilots"]["Row"]
 
 export type Reservation = Database["public"]["Tables"]["reservations"]["Row"]
+
+export type Salary = Database["public"]["Tables"]["salaries"]["Row"]
 
 export type TimeAvailability = Database["public"]["Tables"]["time_availability"]["Row"]
 

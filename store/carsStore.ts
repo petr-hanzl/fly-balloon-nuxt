@@ -23,8 +23,6 @@ export const useCarStore = defineStore('carStore', {
       }
 
       if (data) {
-        console.log('data')
-        console.log(data)
         this.cars = data
       }
     },
