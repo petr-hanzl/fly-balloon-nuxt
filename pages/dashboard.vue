@@ -20,7 +20,7 @@
 <script setup lang="ts">
 
   import {useFlightStore} from "~/store/flightStore.ts";
-  import LineGraph from "~/components/graph/LineGraph.vue";
+  import LineGraph from "~/components/graph/DashboardOrderGraph.vue";
 
   definePageMeta({
       middleware: ['auth'],

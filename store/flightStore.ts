@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import supabase from '~/supabase/client'
 import { Flight, FlightStatus, FlightTicket, FlightType } from '~/types/collection'
+import {da} from "vuetify/locale";
 
 
 export const useFlightStore = defineStore('flightStore', {
@@ -116,6 +117,27 @@ export const useFlightStore = defineStore('flightStore', {
         })
       }
       return null
+    },
+
+    async fetchFlightByID(flightID): Flight | null {
+      const {data, error} = await supabase
+          .from('flights')
+          .select(
+              `*, 
+              flight_types(type, maximum_capacity), 
+              flight_status(status),
+              balloons(registration_number), 
+              pilots(extended_users(first_name, last_name)),
+              drivers(extended_users(first_name, last_name))`
+          )
+          .eq('id', flightID)
+      if (error) {
+        console.log("fetch flight by id err")
+        console.log(JSON.stringify(error))
+
+        return null
+      }
+      return data?.at(0)
     },
 
     // flight types

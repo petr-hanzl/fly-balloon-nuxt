@@ -1,22 +1,25 @@
 <template>
 <!--  todo search-->
-    <VDataTable
+    <VDataTableServer
         :headers="headers"
         :items-length="numberOfItems"
         :items="items"
         :loading="loading"
         class=" ma-7 rounded-xl"
+        :hover="true"
+        to="/"
         item-value="name"
         @update:options="loadItems"
+        @click:row="(event, row) => showDetails(row.item.raw.id)"
     >
 
-    </VDataTable>
+    </VDataTableServer>
 </template>
 
 <script setup lang="ts">
   // todo Dita basic styling header + table aligning + button
 
-  import { VDataTable } from 'vuetify/labs/VDataTable'
+  import { VDataTableServer } from 'vuetify/labs/VDataTable'
 
   interface Props {
       items: any[],
@@ -39,6 +42,10 @@
       // loading = false todo this is not being called
   }
 
+  const route = useRoute()
+  const showDetails = (id: number) => {
+      navigateTo(`${route.path}/${id}`)
+  }
 
 
 </script>
