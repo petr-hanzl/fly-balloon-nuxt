@@ -1,12 +1,20 @@
 import { defineStore } from 'pinia'
 import supabase from '~/supabase/client'
 import { Flight, FlightStatus, FlightTicket, FlightType } from '~/types/collection'
-import {da} from "vuetify/locale";
+import {FlightDetail} from "~/types/custom.ts";
 
+
+const flightsQuery = `*, 
+              flight_types(type, maximum_capacity), 
+              flight_status(status),
+              balloons(registration_number), 
+              cars(name),
+              pilots(extended_users(first_name, last_name)),
+              drivers(extended_users(first_name, last_name))`
 
 export const useFlightStore = defineStore('flightStore', {
   state: () => ({
-    flights: [] as Flight[],
+    flights: [] as FlightDetail[],
     flightTypes: [] as FlightType[],
     flightStatus: [] as FlightStatus[],
     flightTickets: [] as FlightTicket[],
@@ -22,14 +30,7 @@ export const useFlightStore = defineStore('flightStore', {
 
       const { data, error } = await supabase
           .from('flights')
-          .select(
-              `*, 
-              flight_types(type, maximum_capacity), 
-              flight_status(status),
-              balloons(registration_number), 
-              pilots(extended_users(first_name, last_name)),
-              drivers(extended_users(first_name, last_name))`
-          )
+          .select(flightsQuery)
       if (error) {
         console.log('error')
         console.log(error)
@@ -108,7 +109,7 @@ export const useFlightStore = defineStore('flightStore', {
         .eq('id', flightID)
     },
 
-    getFlightByID (flightID: number): Flight | null {
+    getFlightByID (flightID: number): FlightDetail | null {
       if (this.flights && this.flights.length > 0) {
         this.flights.forEach((flights) => {
           if (flights.id == flightID) {
@@ -119,17 +120,10 @@ export const useFlightStore = defineStore('flightStore', {
       return null
     },
 
-    async fetchFlightByID(flightID): Flight | null {
+    async fetchFlightByID(flightID): FlightDetail | null {
       const {data, error} = await supabase
           .from('flights')
-          .select(
-              `*, 
-              flight_types(type, maximum_capacity), 
-              flight_status(status),
-              balloons(registration_number), 
-              pilots(extended_users(first_name, last_name)),
-              drivers(extended_users(first_name, last_name))`
-          )
+          .select(flightsQuery)
           .eq('id', flightID)
       if (error) {
         console.log("fetch flight by id err")
@@ -312,7 +306,7 @@ export const useFlightStore = defineStore('flightStore', {
     }
   },
   getters: {
-    getFlights (): Flight[] {
+    getFlights (): FlightDetail[] {
       return this.flights
     },
     getFlightTypes (): FlightType[] {

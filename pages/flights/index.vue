@@ -50,6 +50,11 @@
             align: "end"
         },
         {
+            title: "Car",
+            key: "cars.name",
+            align: "end"
+        },
+        {
             title: "Pilot",
             key: "pilots.extended_users.first_name",
             align: "end"

@@ -27,10 +27,14 @@
       flight = await flightStore.fetchFlightByID(+route.params.id)
   }
 
+
+
   // if still no result, push flights list
   if (!flight) {
       navigateTo("/flights")
   }
+
+  console.log(flight)
 
 
 

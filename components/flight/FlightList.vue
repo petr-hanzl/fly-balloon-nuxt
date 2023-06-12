@@ -55,6 +55,8 @@ const props = defineProps<Props>()
       await flightStore.fetchFlights(true)
       numberOfItems = flightStore.flights.length // todo dunno
 
+      console.log(flightStore.getFlights)
+
       // loading = false todo this does not work
   }
 
