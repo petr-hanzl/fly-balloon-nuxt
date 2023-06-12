@@ -6,7 +6,7 @@
     <List
         :headers="headers"
         :items="balloonStore.getBalloons"
-        :fetch-callback="balloonStore.fetchAllBalloons"
+        :fetch-callback="balloonStore.fetchPagedBalloons"
         title="Balloons"
         create-path="/balloons/new"
     />

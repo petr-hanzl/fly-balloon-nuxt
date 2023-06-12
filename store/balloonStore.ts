@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import supabase from '~/supabase/client'
-import { Balloon } from '~/types/collection'
+import {Balloon} from '~/types/collection'
 
 export const useBalloonStore = defineStore('balloonStore', {
   state: () => ({
@@ -24,6 +24,27 @@ export const useBalloonStore = defineStore('balloonStore', {
 
       if (data) {
         this.balloons = data
+      }
+    },
+
+    async fetchPagedBalloons (force: boolean, from, to: number) {
+      // do we need to fetch?
+      if (!force && this.balloons && this.balloons.length > 0) {
+        return
+      }
+
+      const { data, error } = await supabase
+          .from('balloons')
+          .select("*", { count: "exact" })
+          .order("id", { ascending: true })
+          .range(from, to);
+      if (error) {
+        console.log('error balloons')
+        console.log(error)
+      }
+
+      if (data) {
+        this.balloons.push(data)
       }
     },
 
@@ -52,12 +73,6 @@ export const useBalloonStore = defineStore('balloonStore', {
     },
 
     getBalloonByID (balloonID: number): Balloon | null {
-      // if (this.balloons && this.balloons.length > 0) {
-      //     this.balloons.filter((balloon) => {
-      //
-      //         return balloon.id === balloonID
-      //     })
-      // }
 
       if (this.balloons && this.balloons.length > 0) {
         this.balloons.forEach((balloon) => {
@@ -68,6 +83,20 @@ export const useBalloonStore = defineStore('balloonStore', {
         })
       }
       return null
+    },
+
+    async fetchBalloonByID(balloonID): Balloon | null {
+      const {data, error} = await supabase
+          .from('balloons')
+          .select()
+          .eq('id', balloonID)
+      if (error) {
+        console.log("fetch balloon by id err")
+        console.log(JSON.stringify(error))
+
+        return null
+      }
+      return data?.at(0)
     },
 
 

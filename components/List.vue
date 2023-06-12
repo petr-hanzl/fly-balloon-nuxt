@@ -2,10 +2,9 @@
 <!--  todo search-->
     <VDataTableServer
         :headers="headers"
-        :items-length="numberOfItems"
-        :items="items"
+        :items="props.items"
         :loading="loading"
-        class=" ma-7 rounded-xl"
+        class="ma-7 rounded-xl"
         :hover="true"
         to="/"
         item-value="name"
@@ -20,6 +19,7 @@
   // todo Dita basic styling header + table aligning + button
 
   import { VDataTableServer } from 'vuetify/labs/VDataTable'
+  import {tr} from "vuetify/locale";
 
   interface Props {
       items: any[],
@@ -28,18 +28,26 @@
   }
 
   const props = defineProps<Props>()
-
-  let numberOfItems: number
-  let loading: boolean
+  let previousNumberOfItems = 0
+  let numberOfItems = ref(10)
+  let loading = ref(true)
 
   const loadItems = async () => {
-      // loading = true todo how with async?
+      loading.value = true
 
-      // force fetch all flights
-      await props.fetchCallback(true)
-      numberOfItems = props.items.length // todo dunno
+      if (numberOfItems.value !== 10) {
+          previousNumberOfItems = numberOfItems.value
+      }
 
-      // loading = false todo this is not being called
+      console.log(previousNumberOfItems)
+      console.log(numberOfItems.value)
+
+      await props.fetchCallback(true, previousNumberOfItems, numberOfItems.value-1)
+
+      console.log(props.items)
+
+
+      loading.value = false
   }
 
   const route = useRoute()

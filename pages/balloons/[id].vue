@@ -1,23 +1,32 @@
 <template>
-  <div> {{ balloon }}</div>
+  <BalloonDetail
+          :balloon="Balloon"
+  />
 </template>
 
 <script setup lang="ts">
 
-import { useBalloonStore } from '~/store/balloonStore'
+  import { useBalloonStore } from '~/store/balloonStore'
+  import {Balloon} from "~/types/collection.ts";
 
-definePageMeta({
-  middleware: ['auth'],
-  excludeFromMenu: true
-})
+  definePageMeta({
+    middleware: ['auth'],
+    excludeFromMenu: true
+  })
 
-const balloonStore = useBalloonStore()
+  const route = useRoute()
+  const balloonStore = useBalloonStore()
 
-await balloonStore.fetchAllBalloons(false)
+  let balloon: Balloon | null
+  balloon = balloonStore.getBalloonByID(+route.params.id)
 
-const route = useRoute()
+  if (!balloon) {
+      balloon = await balloonStore.fetchBalloonByID(+route.params.id)
+  }
 
-const balloon = balloonStore.getBalloonByID(+route.params.id)
+  if (!balloon) {
+      navigateTo("/balloons")
+  }
 
 </script>
 
