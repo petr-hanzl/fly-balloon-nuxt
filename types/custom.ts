@@ -17,3 +17,10 @@ export interface DriverDetail extends Driver {
 export interface PilotDetail extends Pilot {
     extended_users: ExtendedUser
 }
+
+// todo add optional second text
+export type DetailedInfoType = {
+    icon: string,
+    title: string,
+    text: string | null
+}
